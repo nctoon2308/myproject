@@ -1,3 +1,32 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 27, 2020 lúc 12:38 PM
+-- Phiên bản máy phục vụ: 10.4.11-MariaDB
+-- Phiên bản PHP: 7.4.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Cơ sở dữ liệu: `location`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nv4_vi_location_district`
+--
+
 CREATE TABLE `nv4_vi_location_district` (
   `id` mediumint(8) UNSIGNED NOT NULL,
   `idprovince` mediumint(8) UNSIGNED NOT NULL DEFAULT 0,
@@ -8,7 +37,7 @@ CREATE TABLE `nv4_vi_location_district` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `nv4_vi_location_district`
+-- Đang đổ dữ liệu cho bảng `nv4_vi_location_district`
 --
 
 INSERT INTO `nv4_vi_location_district` (`id`, `idprovince`, `title`, `alias`, `weight`, `status`) VALUES
@@ -729,7 +758,7 @@ INSERT INTO `nv4_vi_location_district` (`id`, `idprovince`, `title`, `alias`, `w
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nv4_vi_location_province`
+-- Cấu trúc bảng cho bảng `nv4_vi_location_province`
 --
 
 CREATE TABLE `nv4_vi_location_province` (
@@ -741,7 +770,7 @@ CREATE TABLE `nv4_vi_location_province` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `nv4_vi_location_province`
+-- Đang đổ dữ liệu cho bảng `nv4_vi_location_province`
 --
 
 INSERT INTO `nv4_vi_location_province` (`id`, `title`, `alias`, `weight`, `status`) VALUES
@@ -812,7 +841,7 @@ INSERT INTO `nv4_vi_location_province` (`id`, `title`, `alias`, `weight`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nv4_vi_location_ward`
+-- Cấu trúc bảng cho bảng `nv4_vi_location_ward`
 --
 
 CREATE TABLE `nv4_vi_location_ward` (
@@ -826,7 +855,7 @@ CREATE TABLE `nv4_vi_location_ward` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `nv4_vi_location_ward`
+-- Đang đổ dữ liệu cho bảng `nv4_vi_location_ward`
 --
 
 INSERT INTO `nv4_vi_location_ward` (`id`, `idprovince`, `iddistrict`, `title`, `alias`, `weight`, `status`) VALUES
@@ -12072,12 +12101,38 @@ INSERT INTO `nv4_vi_location_ward` (`id`, `idprovince`, `iddistrict`, `title`, `
 (8231311, 823, 82313, 'Xã Tân ân', 'Xa-Tan-An', 6, 1),
 (8231313, 823, 82313, 'Thị Trấn Rạch Gốc', 'Thi-Tran-Rach-Goc', 7, 1);
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `id_district` int(11) NOT NULL,
+  `id_province` int(11) NOT NULL,
+  `id_ward` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `phone`, `email`, `id_district`, `id_province`, `id_ward`) VALUES
+(1, '', 0, '', 805, 0, 0),
+(2, '', 0, '', 805, 0, 0),
+(3, 'Đào Thế Phượng', 974745920, 'daothephuong071100@gmail.com', 207, 20713, 2071309),
+(4, 'Đào Thế Phượng', 974745920, 'daothephuong071100@gmail.com', 207, 20713, 2071309);
+
+--
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `nv4_vi_location_district`
+-- Chỉ mục cho bảng `nv4_vi_location_district`
 --
 ALTER TABLE `nv4_vi_location_district`
   ADD PRIMARY KEY (`id`),
@@ -12085,14 +12140,14 @@ ALTER TABLE `nv4_vi_location_district`
   ADD KEY `idprovince` (`idprovince`);
 
 --
--- Indexes for table `nv4_vi_location_province`
+-- Chỉ mục cho bảng `nv4_vi_location_province`
 --
 ALTER TABLE `nv4_vi_location_province`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `alias` (`alias`);
 
 --
--- Indexes for table `nv4_vi_location_ward`
+-- Chỉ mục cho bảng `nv4_vi_location_ward`
 --
 ALTER TABLE `nv4_vi_location_ward`
   ADD PRIMARY KEY (`id`),
@@ -12101,24 +12156,40 @@ ALTER TABLE `nv4_vi_location_ward`
   ADD KEY `iddistrict` (`iddistrict`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `nv4_vi_location_district`
+-- AUTO_INCREMENT cho bảng `nv4_vi_location_district`
 --
 ALTER TABLE `nv4_vi_location_district`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82314;
 
 --
--- AUTO_INCREMENT for table `nv4_vi_location_province`
+-- AUTO_INCREMENT cho bảng `nv4_vi_location_province`
 --
 ALTER TABLE `nv4_vi_location_province`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=824;
 
 --
--- AUTO_INCREMENT for table `nv4_vi_location_ward`
+-- AUTO_INCREMENT cho bảng `nv4_vi_location_ward`
 --
 ALTER TABLE `nv4_vi_location_ward`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8231314;
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
